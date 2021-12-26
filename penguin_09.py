@@ -1,13 +1,23 @@
 import os
 import numpy as np
+import random
 
 sex_conversion = {"male": 0, "female": 1}
 penguin_label_conversion = {"Adelie": 0, "Chinstrap": 1, "Gentoo": 2}
 
 def main():
     ls_penguins = load_data()
-    for i in ls_penguins:
-        print(i)
+    ls_train, ls_test = split_data(ls_penguins)
+    print(ls_train)
+    print(ls_test)
+
+def split_data(ls_penguins):
+    ls_train = []
+    ls_test = []
+    random.shuffle(ls_penguins)
+    ls_train = ls_penguins[0:len(ls_penguins)//2]
+    ls_test = ls_penguins[len(ls_penguins)//2:]
+    return ls_train, ls_test
 
 def load_data():
     ls_penguins = []
